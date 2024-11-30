@@ -21,6 +21,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*"); // 모든 헤더 허용
     }
 
+
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 이미지 파일 경로 등록

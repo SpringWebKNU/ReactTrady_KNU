@@ -1,27 +1,34 @@
 package com.example.trady.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Generated;
+import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 @Entity
 public class Member {
     @Generated
     private static final Logger log = LoggerFactory.getLogger(Member.class);
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long userid;
+
     private String username;
+
     private String password;
+
     private String email;
+
     private String phonenumber;
+
     private String addr;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private List<Qna> qnaList;
 
     public Member(Long userid, String username, String password, String email, String phonenumber, String addr) {
         this.userid = userid;

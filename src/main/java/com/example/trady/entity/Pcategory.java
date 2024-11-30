@@ -26,6 +26,15 @@ public class Pcategory {
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean isFirst = false; // 기본값을 false로 설정
 
+    // One-to-Many 관계 추가 (양방향)
+    @OneToMany(mappedBy = "pcategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private List<Product> products;
+
+    // 선택 여부를 나타내는 필드
+    private boolean isSelected;  // 카테고리가 선택되었는지 여부
+
+
     public boolean isFirst() {
         return isFirst;
     }
@@ -34,14 +43,6 @@ public class Pcategory {
         isFirst = first;
     }
 
-    // One-to-Many 관계 추가 (양방향)
-    @OneToMany(mappedBy = "pcategory", cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private List<Product> products;
-
-
-    // 선택 여부를 나타내는 필드
-    private boolean isSelected;  // 카테고리가 선택되었는지 여부
 
     // Constructor
     public Pcategory(Long id, String pname) {
