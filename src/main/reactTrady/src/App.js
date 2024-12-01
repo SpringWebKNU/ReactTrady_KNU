@@ -1,17 +1,27 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Replace Switch with Routes
-import QnaForm from './components/QnaForm';  // QnaForm 컴포넌트
-import QnaList from './components/QnaList';  // Import QnaList component
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import QnaForm from "./components/QnaForm";
+import QnaList from "./components/QnaList";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+    const loggedInUser = true; // Replace with your actual logged-in state
+    const isAdmin = false; // Replace with your actual admin state
+    const msg = "환영합니다!"; // Replace with your actual message
+
     return (
         <Router>
-            <Routes>
-                {/* Update Route component with element */}
-                <Route path="/qna/create" element={<QnaForm />} />
-                <Route path="/qnas" element={<QnaList />} />
-                {/* Add other routes here */}
-            </Routes>
+            <Header loggedInUser={loggedInUser} isAdmin={isAdmin} msg={msg} />
+            <main className="container my-4">
+                <Routes>
+                    <Route path="/qna/create" element={<QnaForm />} />
+                    <Route path="/qnas" element={<QnaList />} />
+                    {/* Add other routes here */}
+                </Routes>
+            </main>
+            <Footer />
         </Router>
     );
 }
