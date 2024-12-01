@@ -21,8 +21,6 @@ public interface QnaService {
 
     List<QnaAnswer> getAnswersByQnaId(Long qnaId);
 
-    Qna updateQna(Long qnaId, QnaForm qnaForm);
-
     void deleteQna(Long qnaId);
 
     void deleteAnswer(Long qnaId, Long answerId);

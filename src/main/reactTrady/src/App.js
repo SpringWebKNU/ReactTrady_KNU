@@ -5,13 +5,12 @@ import Footer from "./components/Footer";
 import QnaForm from "./components/QnaForm";
 import QnaList from "./components/QnaList";
 import QnaDetail  from "./components/QnaDetail";
-import QnaEdit from "./components/QnaEdit";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     const loggedInUser = true; // Replace with your actual logged-in state
     const isAdmin = false; // Replace with your actual admin state
-    const msg = "환영합니다!"; // Replace with your actual message
+    const msg = "Q&A입니다. 문의사항을 남겨주세요."; // Replace with your actual message
 
     return (
         <Router>
@@ -21,8 +20,6 @@ function App() {
                     <Route path="/qna/create" element={<QnaForm />} />
                     <Route path="/qnas" element={<QnaList />} />
                     <Route path="/qna/:qnaId" element={<QnaDetail />} />
-                    <Route path="/qna/edit/:qnaId" element={<QnaEdit />} />
-
                     {/* Add other routes here */}
                 </Routes>
             </main>

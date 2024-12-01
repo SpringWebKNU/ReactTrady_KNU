@@ -47,28 +47,6 @@ public class QnaController {
         return ResponseEntity.ok(qna);
     }
 
-    // 특정 Q&A에 답변 추가
-    // Q&A 답변 추가
-//    @PostMapping("/{qnaId}/answers")
-//    public ResponseEntity<QnaAnswer> addAnswer(
-//            @PathVariable Long qnaId,
-//            @RequestBody QnaAnswerForm qnaAnswerForm) {
-//
-//        // Member ID를 사용하여 Member 객체 조회
-//        Member member = memberService.getUserById(qnaAnswerForm.getMemberId());
-//
-//        // Member가 존재하지 않으면 에러 처리
-//        if (member == null) {
-//            return ResponseEntity.badRequest().body(null);  // Member가 없으면 400 Bad Request 반환
-//        }
-//
-//        // 답변 추가 서비스 호출
-//        QnaAnswer qnaAnswer = qnaService.addAnswer(qnaId, qnaAnswerForm, member);  // 수정된 addAnswer 호출
-//
-//        // 성공적으로 작성된 답변을 반환
-//        return ResponseEntity.ok(qnaAnswer);
-//    }
-
 
     @GetMapping("/{qnaId}/answers")
     public ResponseEntity<List<QnaAnswer>> getAnswers(@PathVariable Long qnaId) {
@@ -91,14 +69,6 @@ public class QnaController {
         // 성공적으로 작성된 답변을 반환
         return ResponseEntity.ok(qnaAnswer);
     }
-
-    @PatchMapping("/{qnaId}")
-    public ResponseEntity<Qna> updateQna(@PathVariable Long qnaId, @RequestBody QnaForm qnaForm) {
-        // 해당 QnaId에 해당하는 게시글을 수정
-        Qna updatedQna = qnaService.updateQna(qnaId, qnaForm);
-        return ResponseEntity.ok(updatedQna);
-    }
-
 
     @DeleteMapping("/{qnaId}")
     public ResponseEntity<Void> deleteQna(@PathVariable Long qnaId) {

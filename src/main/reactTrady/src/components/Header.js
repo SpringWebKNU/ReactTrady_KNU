@@ -51,25 +51,6 @@ const Header = ({ loggedInUser, isAdmin, msg }) => {
                         </form>
 
                         <ul className="navbar-nav">
-                            {user ? (
-                                <>
-                                    <li className="nav-item">
-                                        <form action="/members/logout" method="POST" className="d-inline">
-                                            <button type="submit" className="nav-link btn btn-link text-light">로그아웃</button>
-                                        </form>
-                                    </li>
-                                    {!isAdmin && (
-                                        <li className="nav-item">
-                                            <Link className="nav-link" to="http://localhost:8080/members/mypage">마이페이지</Link>
-                                        </li>
-                                    )}
-                                    {isAdmin && (
-                                        <li className="nav-item">
-                                            <Link className="nav-link" to="http://localhost:8080/members/admin">관리자 모드</Link>
-                                        </li>
-                                    )}
-                                </>
-                            ) : (
                                 <>
                                     <li className="nav-item">
                                         <Link className="nav-link" to="http://localhost:8080/members/login">로그인</Link>
@@ -78,7 +59,6 @@ const Header = ({ loggedInUser, isAdmin, msg }) => {
                                         <Link className="nav-link" to="http://localhost:8080/members/join">회원가입</Link>
                                     </li>
                                 </>
-                            )}
                         </ul>
                     </div>
                 </div>

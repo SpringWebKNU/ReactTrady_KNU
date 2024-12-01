@@ -95,24 +95,6 @@ public class QnaServiceImpl implements QnaService {
         return qnaAnswerRepository.findByQna(qna);
     }
 
-    public Qna updateQna(Long qnaId, QnaForm qnaForm) {
-        // QnaId로 게시글 조회
-        Qna qna = qnaRepository.findById(qnaId).orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
-
-        // 수정된 제목과 내용으로 게시글 업데이트
-        if (qnaForm.getTitle() != null) {
-            qna.setTitle(qnaForm.getTitle());
-        }
-        if (qnaForm.getContent() != null) {
-            qna.setContent(qnaForm.getContent());
-        }
-
-        // 변경된 정보를 저장하여 업데이트
-        return qnaRepository.save(qna);
-    }
-
-
-
     public void deleteQna(Long qnaId) {
         // 게시글 조회
         Qna qna = qnaRepository.findById(qnaId)

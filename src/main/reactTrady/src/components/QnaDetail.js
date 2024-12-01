@@ -96,11 +96,6 @@ const QnaDetail = () => {
         }
     };
 
-    const handleEditQna = () => {
-        navigate(`/qnas/edit/${qnaId}`);
-    };
-
-
     return (
         <div className="container mt-4">
             <div className="d-flex justify-content-between mb-4">
@@ -161,15 +156,6 @@ const QnaDetail = () => {
                             className="btn btn-danger"
                             onClick={handleDeleteQna}>
                             게시글 삭제
-                        </button>
-                    </div>
-
-
-                    <div className="mt-4 text-center">
-                        <button
-                            className="btn btn-warning"
-                            onClick={handleEditQna}>
-                            게시글 수정
                         </button>
                     </div>
 
