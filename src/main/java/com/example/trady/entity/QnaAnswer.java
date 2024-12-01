@@ -29,7 +29,7 @@ public class QnaAnswer {
     private Qna qna;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)  // 관리자와 연결
+    @JoinColumn(name = "member_id", nullable = true)
     private Member member;  // 관리자가 답변을 작성
 
     public QnaAnswer(String content, Qna qna, Member member) {

@@ -21,7 +21,7 @@ const QnaForm = () => {
             const response = await axios.post('http://localhost:8080/api/qnas', {
                 title: title,
                 content: content,
-                memberId: 1, // 로그인한 사용자의 ID로 변경해야 함
+                memberId: 1, // 로그인하지 않아도 1로 하드코딩된 사용자 ID를 사용
             });
 
             if (response.status === 200) {
@@ -35,7 +35,7 @@ const QnaForm = () => {
 
     return (
         <div className="container mt-4">
-            <h2>Q&A 작성</h2>
+            <h2>Q&A</h2>
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
 
             <form onSubmit={handleSubmit}>
