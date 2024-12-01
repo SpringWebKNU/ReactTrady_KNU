@@ -28,6 +28,7 @@ public class QnaController {
 
     @GetMapping
     public ResponseEntity<List<Qna>> getAllQnas() {
+        List<Qna> qnas = qnaService.getAllQnas();
         return ResponseEntity.ok(qnaService.getAllQnas());
     }
 

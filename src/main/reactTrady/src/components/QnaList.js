@@ -47,7 +47,7 @@ const QnaList = () => {
                                     <td>{index + 1}</td>
                                     <td>{qna.title}</td>
                                     <td>{qna.content.length > 50 ? qna.content.slice(0, 50) + '...' : qna.content}</td>
-                                    <td>{qna.member ? qna.member.id : '작성자 정보 없음'}</td>
+                                    <td>{qna.member ? qna.member.username : '작성자 정보 없음'}</td>
                                     <td>{new Date(qna.createdAt).toLocaleDateString()}</td>
                                 </tr>
                             ))}
