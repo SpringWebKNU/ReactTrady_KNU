@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = ({ loggedInUser, isAdmin, msg }) => {
+    const [user, setUser] = useState(null);
+    const [admin, setAdmin] = useState(false);
+
+    useEffect(() => {
+        fetch('/api/session') // Endpoint that returns session info (e.g., loggedInUser and isAdmin)
+            .then(response => response.json())
+            .then(data => {
+                setUser(data.currentUser);
+                setAdmin(data.isAdmin);
+            });
+    }, []);
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,7 +51,7 @@ const Header = ({ loggedInUser, isAdmin, msg }) => {
                         </form>
 
                         <ul className="navbar-nav">
-                            {loggedInUser ? (
+                            {user ? (
                                 <>
                                     <li className="nav-item">
                                         <form action="/members/logout" method="POST" className="d-inline">

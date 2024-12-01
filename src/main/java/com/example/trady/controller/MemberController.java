@@ -14,14 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MemberController {
@@ -44,10 +43,13 @@ public class MemberController {
     public String home(HttpSession session, Model model) {
         Member currentUser = (Member)session.getAttribute("currentUser");
         boolean isLoggedIn = currentUser != null;
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        session.setAttribute("isAdmin", isAdmin);
         model.addAttribute("isLoggedIn", isLoggedIn);
         model.addAttribute("currentUser", currentUser);
         return "index";
     }
+
 
     @GetMapping({"/members/admin"})
     public String adminPage(HttpSession session, Model model) {
@@ -201,5 +203,19 @@ public class MemberController {
         boolean success = this.memberService.updateUser(memberForm);
         return success ? "redirect:/members/" + memberForm.getUserid() : "redirect:/members/mypage";
     }
+
+    @GetMapping("/api/session")
+    @ResponseBody
+    public Map<String, Object> getSession(HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        Member currentUser = (Member) session.getAttribute("currentUser");
+        response.put("currentUser", currentUser);
+
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        response.put("isAdmin", isAdmin);
+
+        return response;
+    }
+
 
 }

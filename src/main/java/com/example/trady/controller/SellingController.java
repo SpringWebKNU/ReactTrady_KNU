@@ -116,7 +116,8 @@ public class SellingController {
         Member member = (Member) session.getAttribute("currentUser");
 
         // 관리자 여부 확인 (username이 "admin"인지 검사)
-        boolean isAdmin = member != null && "admin".equals(member.getUsername());
+        Boolean isAdmin = (Boolean)session.getAttribute("isAdmin");
+
 
         try {
             // 판매 정보 삭제
