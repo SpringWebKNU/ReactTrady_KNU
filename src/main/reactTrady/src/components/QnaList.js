@@ -18,39 +18,42 @@ const QnaList = () => {
         navigate('/qna/create');
     };
 
+    const handleViewQna = (qnaId) => {
+        // Q&A 상세 페이지로 이동
+        navigate(`/qna/${qnaId}`);
+    };
+
     return (
         <div className="container mt-5">
             <h1 className="mb-4 text-center">Trandy Q&A</h1>
 
             <div className="mb-4">
-            <div className="d-flex justify-content-between">
-                <div className="ms-auto">
-                    <button className="btn btn-primary" onClick={handleCreateQna}>Q&A 작성하기</button>
+                <div className="d-flex justify-content-between">
+                    <div className="ms-auto">
+                        <button className="btn btn-primary" onClick={handleCreateQna}>Q&A 작성하기</button>
+                    </div>
                 </div>
-            </div>
 
-                <br></br>
+                <br />
                 <div className="table-responsive">
                     <table className="table table-striped table-bordered">
                         <thead>
-                            <tr>
-                                <th scope="col">번호</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">내용</th>
-                                <th scope="col">작성자</th>
-                                <th scope="col">작성일</th>
-                            </tr>
+                        <tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {qnas.map((qna, index) => (
-                                <tr key={qna.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{qna.title}</td>
-                                    <td>{qna.content.length > 50 ? qna.content.slice(0, 50) + '...' : qna.content}</td>
-                                    <td>{qna.member ? qna.member.username : '작성자 정보 없음'}</td>
-                                    <td>{new Date(qna.createdAt).toLocaleDateString()}</td>
-                                </tr>
-                            ))}
+                        {qnas.map((qna, index) => (
+                            <tr key={qna.id} onClick={() => handleViewQna(qna.id)}>
+                                <td>{index + 1}</td>
+                                <td>{qna.title}</td>
+                                <td>{qna.member ? qna.member.id : '작성자 정보 없음'}</td>
+                                <td>{new Date(qna.createdAt).toLocaleDateString()}</td>
+                            </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>

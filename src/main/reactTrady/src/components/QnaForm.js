@@ -36,6 +36,7 @@ const QnaForm = () => {
     return (
         <div className="container mt-4">
             <h2>Q&A</h2>
+            <br></br>
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
 
             <form onSubmit={handleSubmit}>

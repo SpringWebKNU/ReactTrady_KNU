@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import QnaForm from "./components/QnaForm";
 import QnaList from "./components/QnaList";
+import QnaDetail  from "./components/QnaDetail";
+import QnaEdit from "./components/QnaEdit";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -18,6 +20,9 @@ function App() {
                 <Routes>
                     <Route path="/qna/create" element={<QnaForm />} />
                     <Route path="/qnas" element={<QnaList />} />
+                    <Route path="/qna/:qnaId" element={<QnaDetail />} />
+                    <Route path="/qna/edit/:qnaId" element={<QnaEdit />} />
+
                     {/* Add other routes here */}
                 </Routes>
             </main>
