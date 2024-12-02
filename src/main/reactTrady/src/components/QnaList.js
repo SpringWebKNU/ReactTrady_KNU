@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const QnaList = () => {
     const [qnas, setQnas] = useState([]);
-    const navigate = useNavigate();  // 페이지 이동을 위한 hook
+    const navigate = useNavigate();
 
     useEffect(() => {
         // GET 요청으로 Q&A 데이터를 가져옵니다
@@ -12,7 +12,7 @@ const QnaList = () => {
             .then(async (response) => {
                 const qnasWithAnswerCount = await Promise.all(response.data.map(async (qna) => {
                     try {
-                        // 각 Q&A의 답변 개수를 가져오기 위한 추가 요청
+                        // 각 Q&A의 답변 개수 가져온다.
                         const answerResponse = await axios.get(`http://localhost:8080/api/qnas/${qna.id}/answers`);
                         return { ...qna, answerCount: answerResponse.data.length };
                     } catch (error) {
@@ -26,12 +26,10 @@ const QnaList = () => {
     }, []);
 
     const handleCreateQna = () => {
-        // Q&A 작성 페이지로 이동
         navigate('/qna/create');
     };
 
     const handleViewQna = (qnaId) => {
-        // Q&A 상세 페이지로 이동
         navigate(`/qna/${qnaId}`);
     };
 

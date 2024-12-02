@@ -2,7 +2,6 @@
 
 <div class="container mt-4">
     <div class="row">
-        <!-- Back to List Button (상품사진 위쪽) -->
         <div class="col-12 mb-3">
             <a href="/products/all" class="btn btn-secondary">목록 페이지</a>
         </div>
@@ -12,33 +11,27 @@
     <div class="row">
         {{#product}}
             <div class="col-md-6">
-                <!-- Product Image (왼쪽 배치) -->
                 <div class="mb-4">
                     <img src="/images/uploads/{{pimg}}" class="img-fluid shadow-sm" alt="{{pname}}" style="height: 400px; object-fit: cover;">
                 </div>
             </div>
 
             <div class="col-md-6">
-                <!-- Action Buttons (상세, 수정, 삭제) on top-right, inline) -->
             {{#isAdmin}}
                 <div class="d-flex justify-content-end mb-3">
                     <a href="/products/{{id}}/edit" class="btn btn-warning btn-sm me-2">수정하기</a>
                     <a href="/products/{{id}}/delete" class="btn btn-danger btn-sm">삭제하기</a>
                 </div>
             {{/isAdmin}}
-                <!-- Product Details (오른쪽 배치, 버튼들 포함) -->
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <!-- Product Name (상품명 크게) -->
                         <h3 class="card-title">{{pname}}</h3>
 
-                        <!-- Product Category (상품명 옆에 작은 크기) -->
                         <p class="card-text text-muted d-inline-block me-3">{{pcategoryName}}</p>
 
-                        <!-- Product Price (가격 크게) -->
+
                         <p class="card-text text-success fs-4">{{formattedPrice}} 원</p> <!-- 포맷된 가격 표시 -->
 
-                        <!-- 판매하기와 구매하기 버튼도 오른쪽 정렬 -->
                          {{^isAdmin}}
                         <div class="d-flex justify-content-end mt-3">
                             <a href="/products/{{id}}/sell" class="btn btn-primary btn-lg">판매</a>
@@ -48,7 +41,6 @@
                     </div>
                 </div>
 
-                <!-- 현재 구매가능한 상품 테이블 -->
                 <div class="mt-4">
                     <h4>현재 구매가능한 상품</h4>
                     <table class="table table-bordered table-striped">
@@ -69,7 +61,6 @@
                     </table>
                 </div>
 
-                <!-- 판매완료된 상품 테이블 -->
                 <div class="mt-4">
                     <h4>판매완료된 상품</h4>
                     <table class="table table-bordered table-striped">

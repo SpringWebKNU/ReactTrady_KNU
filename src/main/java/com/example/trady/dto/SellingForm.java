@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 public class SellingForm {
 
     Long id;
-    Member member;  // Added reference to Member
-    Product sproduct;  // 상품
+    Member member;
+    Product sproduct;
     String size;
     long sprice;
 
@@ -27,7 +27,6 @@ public class SellingForm {
         this.isSold = true;
     }
 
-    // Getter와 Setter
     public boolean isSold() {
         return isSold;
     }

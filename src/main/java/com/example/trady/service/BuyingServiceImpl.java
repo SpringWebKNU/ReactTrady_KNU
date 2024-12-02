@@ -29,56 +29,44 @@ public class BuyingServiceImpl implements BuyingService {
 
     @Transactional
     public Buying createBuyingWithUser(Long productId, Long productOptionId, Member user) throws Exception {
-        // 상품과 상품 옵션 조회
+
+        // 상품, 상품 옵션 조회
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new Exception("Product not found"));
+                .orElseThrow(() -> new Exception("xxxxx"));
 
         ProductOption productOption = productOptionRepository.findById(productOptionId)
-                .orElseThrow(() -> new Exception("ProductOption not found"));
+                .orElseThrow(() -> new Exception("xxxxx"));
 
-        // Buying 엔티티 생성 (user 정보 추가)
+        // Buying 생성 여기에 회원 정보도 넣어줍니당!!!
         Buying buying = new Buying();
-        buying.setUser(user);  // 로그인한 사용자 정보 설정
+        buying.setUser(user);  // 로그인한 사용자
         buying.setProduct(product);
         buying.setProductOption(productOption);
+        buying.setSize(productOption.getSize());
+        buying.setPrice(productOption.getPrice());
 
-        buying.setSize(productOption.getSize());  // size 값 설정
-        buying.setPrice(productOption.getPrice());  // price 값 설정
-
-
-        // Buying 저장
         Buying savedBuying = buyingRepository.save(buying);
-
-        // Selling 업데이트
+        
         Selling selling = sellingRepository.findByProductAndSize(productId, productOption.getSize());
         if (selling != null && !selling.isSold()) {
-            selling.markAsSold();  // Selling 상태를 '판매 완료'로 변경
+            selling.markAsSold();  // 판매완료됨
             sellingRepository.save(selling);
         }
-
-        // ProductOption 업데이트
+        
         if (!productOption.isSold()) {
-            productOption.markAsSold();  // ProductOption 상태를 '판매 완료'로 변경
-            productOptionRepository.markAsSold(productOptionId);  // DB에 업데이트
+            productOption.markAsSold();  // 판매완료됨
+            productOptionRepository.markAsSold(productOptionId);
         }
 
-        // BUYING 테이블에서 product_option_id를 다른 값으로 업데이트 (NULL을 피하기 위해)
+        // BUYING에서 product_option_id -> 다른 값으로.. (NULL을 피하기 위해)
         buyingRepository.updateProductOptionToDefault(productOptionId);
-
-        // ProductOption 삭제
         productOptionRepository.deleteById(productOptionId);  // ProductOption 삭제
 
         return savedBuying;
     }
 
-
     public List<Buying> getPurchasesByProduct(Long productId) {
         return buyingRepository.findByProductId(productId);
-    }
-
-    public List<Buying> getAllBuyings() {
-        // 모든 구매 정보를 조회하여 반환
-        return buyingRepository.findAll();
     }
 
     @Override

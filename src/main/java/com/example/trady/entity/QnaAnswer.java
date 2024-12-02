@@ -18,19 +18,19 @@ public class QnaAnswer {
     private Long id;
 
     @Column(nullable = false)
-    private String content;  // 답변 내용
+    private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
-    private Date createdAt = new Date();  // 답변 작성 시간
+    private Date createdAt = new Date();
 
     @ManyToOne
-    @JoinColumn(name = "qna_id", nullable = false)  // 질문과 연결
+    @JoinColumn(name = "qna_id", nullable = false)
     private Qna qna;
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = true)
-    private Member member;  // 관리자가 답변을 작성
+    private Member member;
 
     public QnaAnswer(String content, Qna qna, Member member) {
         this.content = content;

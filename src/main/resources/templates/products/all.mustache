@@ -6,7 +6,6 @@
     {{/isAdmin}}
 
     {{#isAdmin}}
-        <!-- Add Product Button -->
         <div class="text-end mt-3">
             <a href="/products/new" class="btn btn-success">상품 등록하기</a>
         </div>
@@ -15,7 +14,6 @@
     <div class="row">
         {{#products}}
             <div class="col-md-4 mb-4">
-                <!-- Product Card -->
                 <div class="card shadow-sm h-100">
                     <a href="/products/{{id}}" class="text-decoration-none">
                         <img src="../images/uploads/{{pimg}}" alt="Product Image" class="card-img-top" style="height: 200px; object-fit: cover;">

@@ -12,5 +12,5 @@ import lombok.ToString;
 public class QnaForm {
     private String title;
     private String content;
-    private Long memberId; // Member를 연결하는 필드
+    private Long memberId;
 }

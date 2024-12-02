@@ -118,9 +118,7 @@ public class MemberController {
         }
 
         List<Selling> sellingList = sellingService.findAllByUser(currentUser);
-
         List<Buying> buyingList = buyingService.findAllByUser(currentUser);
-
 
         model.addAttribute("isLoggedIn", isLoggedIn);
         model.addAttribute("currentUserModel", currentUser);
@@ -146,7 +144,7 @@ public class MemberController {
         model.addAttribute("member", member);
         model.addAttribute("sellingList", sellingList);
 
-        return "members/usersell"; // 적절한 뷰 이름으로 수정
+        return "members/usersell";
     }
 
 

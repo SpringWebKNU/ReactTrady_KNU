@@ -16,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 public class BuyingForm {
 
     Long id;
-    Member member;  // Added reference to Member
-    Product product;  // 상품
+    Member member;
+    Product product;
     ProductOption productOption;  // 선택된 옵션
-    String size;  // 상품 옵션의 사이즈
+    String size;
     long price;
 
     public Buying toEntity() {

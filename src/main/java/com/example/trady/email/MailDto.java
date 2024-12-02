@@ -14,11 +14,8 @@ public class MailDto {
     private String address;
     private String title;
     private String message;
-    private String size;  // 사이즈
-    private String price; // 가격
-
-    // getter, setter 추가
-
+    private String size;
+    private String price;
 
     public String getEmail() {
         return email;

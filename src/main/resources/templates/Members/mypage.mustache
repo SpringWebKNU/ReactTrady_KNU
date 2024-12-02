@@ -3,7 +3,6 @@
 <div class="container mt-4">
     {{#isLoggedIn}}
 
-        <!-- 탭 네비게이션 -->
         <ul class="nav nav-tabs" id="userTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="user-info-tab" data-bs-toggle="tab" data-bs-target="#user-info" type="button" role="tab" aria-controls="user-info" aria-selected="true">회원 정보</button>
@@ -16,13 +15,10 @@
             </li>
         </ul>
 
-        <!-- 탭 콘텐츠 -->
         <div class="tab-content mt-3" id="userTabsContent">
-            <!-- 회원 정보 탭 -->
             <div class="tab-pane fade show active" id="user-info" role="tabpanel" aria-labelledby="user-info-tab">
                 <div class="row justify-content-center">
                     <div class="col-md-4 mb-4">
-                        <!-- User Card -->
                         <div class="card shadow-sm h-100">
                             <div class="card-body">
                                 <div class="card-body text-center">
@@ -42,7 +38,6 @@
                 </div>
             </div>
 
-            <!-- 상품 관리 탭 -->
             <div class="tab-pane fade" id="product-management" role="tabpanel" aria-labelledby="product-management-tab">
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
@@ -95,7 +90,6 @@
                 </div>
             </div>
 
-            <!-- 구매 관리 탭 -->
             <div class="tab-pane fade" id="buying-management" role="tabpanel" aria-labelledby="buying-management-tab">
                 <div class="card shadow-sm h-100">
                     <div class="card-body">

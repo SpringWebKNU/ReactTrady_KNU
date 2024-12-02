@@ -8,10 +8,10 @@ import QnaDetail from "./components/QnaDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-    const [loggedInUser, setLoggedInUser] = useState(null); // Stores the logged-in user
-    const [isAdmin, setIsAdmin] = useState(false); // Indicates whether the logged-in user is an admin
+    const [loggedInUser, setLoggedInUser] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
 
-    const msg = "Q&A입니다. 문의사항을 남겨주세요."; // Custom message
+    const msg = "Q&A입니다. 문의사항을 남겨주세요.";
 
     return (
         <Router>

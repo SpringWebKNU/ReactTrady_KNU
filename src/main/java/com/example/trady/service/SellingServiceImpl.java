@@ -18,20 +18,7 @@ public class SellingServiceImpl implements SellingService {
     private SellingRepository sellingRepository;
 
     @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private ProductOptionRepository productOptionRepository;
-
-    @Autowired
     private ProductOptionService productOptionService;
-
-    @Override
-    public Selling createSelling(Selling selling) {
-        // 판매 정보를 저장
-        return sellingRepository.save(selling);
-    }
-
 
     @Override
     public void deleteSelling(Long sellingId) {
@@ -44,28 +31,17 @@ public class SellingServiceImpl implements SellingService {
     }
 
     @Override
-    public Long findLowestPriceByProductId(Long productId) {
-        return sellingRepository.findLowestPriceByProductId(productId);
-    }
-
-    @Override
     public Selling createSelling(Selling selling, Product product, String size, long price) {
-        // 1. 판매 정보를 저장
+        // 판매 -> 입력할 떄 사이즈,가격 입력
         Selling savedSelling = sellingRepository.save(selling);
-
-        // 2. 상품 옵션 저장: size와 price 값을 이용해 상품 옵션을 생성
-        // 제품에 대한 옵션을 생성하고 저장
         productOptionService.createProductOption(product, size, price);
 
-        // 3. 저장된 Selling 객체 반환
         return savedSelling;
     }
-
 
     @Override
     public List<Selling> findAllByUser(Member user) {
         return sellingRepository.findByUser(user);
     }
-
 
 }

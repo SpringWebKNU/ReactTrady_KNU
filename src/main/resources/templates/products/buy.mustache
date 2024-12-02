@@ -1,44 +1,36 @@
 {{>layouts/header}}
 
-<!-- 컨테이너 시작 -->
 <div class="container mt-5">
-    <!-- 그리드 시스템 사용하여 가운데 정렬 -->
     <div class="row justify-content-center">
-        <div class="col-md-6"> <!-- 카드의 가로 크기를 줄임 (8 -> 6) -->
-            <!-- 상품 정보 카드 -->
+        <div class="col-md-6">
+
             <div class="card shadow-lg border-light rounded">
                 <div class="card-body">
                     <div class="text-center mb-4">
                         <img src="../../images/uploads/{{product.pimg}}" class="img-fluid shadow-sm" alt="{{product.pname}}" style="height: 300px; object-fit: cover;"> <!-- 이미지 크기 조정 -->
                     </div>
 
-                    <!-- 상품 제목 -->
                     <h1 class="text-center text-primary mb-3">{{product.pname}}</h1>
-
-                    <!-- 사이즈 선택 -->
                     <h2 class="mt-4 text-center">Select Size</h2>
                     <br>
-                    <!-- 상품 옵션이 존재하는 경우 버튼들 표시 -->
                     <div class="row">
                         {{#productOptions}}
-                            <div class="col-md-3 mb-3"> <!-- 버튼을 한 줄에 최대 4개로 배치 -->
+                            <div class="col-md-3 mb-3">
                                 <form id="form-{{id}}" action="/buying/create" method="post">
                                     <input type="hidden" name="productId" value="{{product.id}}">
                                     <input type="hidden" name="productOptionId" value="{{id}}">
-                                    <!-- 사이즈가 없으면 비활성화된 회색 버튼, 있으면 파란색 버튼 -->
-
                                     <button
                                             style="padding: 10px 30px; font-size: 1rem;"
                                             type="button" onclick="selectSize('{{id}}', '{{price}}')" class="btn btn-block btn-lg {{#size}}btn-outline-primary{{/size}} {{^size}}btn-secondary disabled{{/size}}" id="btn-{{id}}">
-                                        <div>{{size}}</div> <!-- size는 첫 번째 줄에 표시 -->
-                                        <div>{{price}}원</div> <!-- price는 두 번째 줄에 표시 -->
+                                        <div>{{size}}</div>
+                                        <div>{{price}}원</div>
                                     </button>
                                 </form>
                             </div>
                         {{/productOptions}}
                     </div>
 
-                    <!-- 상품 옵션이 없을 경우 메시지 표시 -->
+                    <!-- 상품 옵션이 없을 경우  -->
                     {{^productOptions}}
                         <p class="text-center text-danger">현재 판매중인 사이즈가 없습니다.</p>
                     {{/productOptions}}
@@ -62,7 +54,6 @@
         </div>
     </div>
 </div>
-<!-- 컨테이너 끝 -->
 
 {{>layouts/footer}}
 
@@ -79,7 +70,6 @@
             btn.disabled = false;
         });
 
-        // 이전에 선택된 버튼의 색상도 기본 상태로 복원
         if (lastSelectedButton) {
             lastSelectedButton.classList.remove('btn-primary');
             lastSelectedButton.classList.add('btn-outline-primary');
@@ -99,7 +89,7 @@
         document.getElementById('size-price-container').style.display = 'block';
         document.getElementById('size-price').innerText = price + ' 원';
 
-        // 마지막으로 선택된 버튼을 추적
+        // 마지막으로 선택된 버튼
         lastSelectedButton = selectedButton;
     }
 </script>

@@ -28,7 +28,7 @@ public class Qna {
     private Date createdAt = new Date();
 
     @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false) // 외래키 이름
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     public Qna(String title, String content, Member member) {

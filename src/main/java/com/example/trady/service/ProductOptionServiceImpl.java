@@ -29,11 +29,6 @@ public class ProductOptionServiceImpl implements ProductOptionService{
     }
 
     @Override
-    public ProductOption findById(Long id) {
-        return productOptionRepository.findById(id).orElseThrow(() -> new RuntimeException("ProductOption not found"));
-    }
-
-    @Override
     public ProductOption save(ProductOption productOption) {
         return productOptionRepository.save(productOption);
     }
@@ -50,17 +45,13 @@ public class ProductOptionServiceImpl implements ProductOptionService{
     public void createProductOption(Product product, String size, long price) {
         // ProductOption 생성 후 저장
         ProductOption productOption = new ProductOption();
-        productOption.setProduct(product);  // 상품 설정
-        productOption.setSize(size);  // 사이즈 설정
-        productOption.setPrice(price);  // 가격 설정
+        productOption.setProduct(product);
+        productOption.setSize(size);
+        productOption.setPrice(price);
 
         productOptionRepository.save(productOption);
     }
 
-    @Override
-    public ProductOption findByProductAndSize(Product product, String size) {
-        return productOptionRepository.findByProductAndSize(product, size);
-    }
 
     @Override
     public List<ProductOption> findByProduct(Product product) {

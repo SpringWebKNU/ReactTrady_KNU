@@ -19,7 +19,6 @@ public class PcategoryForm {
     public Pcategory toEntity(){
         return new Pcategory(id,pname);
     }
-
     public void logInfo() {
         log.info("id: {}, pname: {}", id, pname);
     }

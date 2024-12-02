@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public interface SellingRepository extends JpaRepository<Selling, Long> {
 
-    // 사용자별 판매 상품 조회 쿼리
     List<Selling> findByUser(Member user);
 
     void deleteBySproduct(Product product);

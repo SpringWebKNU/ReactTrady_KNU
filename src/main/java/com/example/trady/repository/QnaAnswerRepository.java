@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface QnaAnswerRepository extends JpaRepository<QnaAnswer, Long> {
-
     List<QnaAnswer> findByQna(Qna qna);
 }

@@ -14,27 +14,23 @@ public class Selling {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    // 판매자와의 관계 추가
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "userid")
-    Member user;  // 판매자 (회원)
+    Member user;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product sproduct;  // 판매 상품
+    private Product sproduct;
 
     private String size;
     private long sprice;
 
+    private boolean isSold = false;
 
-    private boolean isSold = false;  // 판매 상태 (기본값: false)
-
-    // 판매 완료 상태로 변경하는 메소드
     public void markAsSold() {
         this.isSold = true;
     }
 
-    // Getter와 Setter
     public boolean isSold() {
         return isSold;
     }
@@ -43,7 +39,6 @@ public class Selling {
         this.isSold = sold;
     }
 
-    // 생성자 수정 (user 추가)
     public Selling(Member user, Product sproduct, String size, long sprice) {
         this.user = user;
         this.sproduct = sproduct;
@@ -51,7 +46,6 @@ public class Selling {
         this.sprice = sprice;
     }
 
-    // Getters and setters
     public Member getUser() {
         return user;
     }

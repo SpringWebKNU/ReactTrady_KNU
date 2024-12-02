@@ -18,7 +18,7 @@ public class MailService {
     private static final String FROM_ADDRESS = "jungb1203@naver.com";
 
     public void mailSend(MailDto mailDto) throws MessagingException {
-        // MimeMessage를 사용하여 HTML 메일을 보냄
+        // MimeMessage -> HTML 메일을 보냄
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true); // true는 멀티파트 메시지를 활성화
 
@@ -26,7 +26,6 @@ public class MailService {
         helper.setTo(mailDto.getAddress());
         helper.setSubject("[Trady] 주문 완료: " + mailDto.getTitle());
 
-        // HTML 콘텐츠 구성
         String htmlContent = "<html>" +
                 "<head>" +
                 "</head>" +
@@ -34,14 +33,12 @@ public class MailService {
                 "<div class='container'>" +
                 "<div class='header'>주문이 완료되었습니다!</div>" +
 
-                // 상품 이미지와 정보
                 "<div class='product-details'>" +
                 "<p><strong>상품명:</strong> " + mailDto.getTitle() + "</p>" +
                 "<p><strong>사이즈:</strong> " + mailDto.getSize() + "</p>" +
                 "<p><strong>가격:</strong> <span class='price'>" + mailDto.getPrice() + " 원</span></p>" +
                 "</div>" +
 
-                // 주문 요약
                 "<div class='order-summary'>" +
                 "<p><strong>주문 정보:</strong></p>" +
                 "<p>주문하신 상품은 <strong>" + mailDto.getTitle() + "</strong>입니다.</p>" +
@@ -50,7 +47,6 @@ public class MailService {
                 "<p><strong>이메일:</strong> " + mailDto.getAddress() + "</p>" +
                 "</div>" +
 
-                // 하단 정보
                 "<div class='footer'>" +
                 "<p>감사합니다. Trady에서 쇼핑을 즐기세요!</p>" +
                 "<p><a href='http://localhost:8080/products/all'>Trady 쇼핑몰</a></p>" +
@@ -59,9 +55,7 @@ public class MailService {
                 "</body>" +
                 "</html>";
 
-
-        helper.setText(htmlContent, true); // 두 번째 인자는 HTML 형식을 허용하는지 여부
-
+        helper.setText(htmlContent, true); // HTML 형식을 허용하는지 여부
         mailSender.send(message);
     }
 

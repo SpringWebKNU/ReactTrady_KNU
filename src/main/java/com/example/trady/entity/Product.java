@@ -17,22 +17,15 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     private String pname;
-
-
     private String pimg;
+    private String formattedPrice; // 가격 포맷해서 표시하려고 만듬
 
-    // formattedPrice 필드 추가
-    private String formattedPrice;
-
-    // Category와 연관 관계 설정
     @ManyToOne
-    @JoinColumn(name = "pcategory_id",  referencedColumnName = "id") // 외래 키 이름
+    @JoinColumn(name = "pcategory_id",  referencedColumnName = "id")
     private Pcategory pcategory;
 
-
     @Column(nullable = false)
-    private LocalDateTime pdate; // 변경된 필드 타입
-
+    private LocalDateTime pdate;
 
     public String getPcategoryName() {
         return pcategory != null ? pcategory.getPname() : "카테고리 없음";
@@ -58,7 +51,6 @@ public class Product {
         return pname;
     }
 
-
     public String getPimg() {
         return pimg;
     }
@@ -74,11 +66,9 @@ public class Product {
         this.pname = pname;
     }
 
-
     public void setPimg(String pimg) {
         this.pimg = pimg;
     }
-
 
     public void setPcategory(Pcategory pcategory) {
         this.pcategory = pcategory;

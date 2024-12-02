@@ -17,27 +17,21 @@ public class ProductOption {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;  // 상품 정보
+    private Product product;
+    private String size;
+    private long price;
 
-    private String size;  // 사이즈 정보
-    private long price;  // 가격 (사용자가 판매할 때 입력한 가격)
-
-    @Transient  // DB에 저장하지 않겠다는 표시
+    @Transient
     private String formattedPrice;
+    private boolean isSold = false; // 품절 여부
 
-
-    private boolean isSold = false;  // 기본값은 false (판매되지 않음)
-
-    // 판매된 상품 옵션을 '판매 완료'로 마킹하는 메소드
     public void markAsSold() {
         this.isSold = true;
     }
-
     public boolean isSold() {
         return isSold;
     }
 
-    // Getters and setters
     public String getFormattedPrice() {
         return formattedPrice;
     }
@@ -46,14 +40,12 @@ public class ProductOption {
         this.formattedPrice = formattedPrice;
     }
 
-    // Constructor for easy initialization
     public ProductOption(Product product, String size, long price) {
         this.product = product;
         this.size = size;
         this.price = price;
     }
 
-    // Getter and Setter methods...
     public Long getId() {
         return id;
     }

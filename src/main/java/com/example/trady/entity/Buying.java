@@ -49,20 +49,16 @@ public class Buying {
         this.formattedPrice = formattedPrice;
     }
 
-    // 기본 옵션 설정
     public ProductOption getProductOption() {
         if (productOption == null) {
-            // DB에서 기본 옵션을 조회하거나 미리 지정된 기본값을 반환
-            return getDefaultProductOption();  // 실제 기본 옵션 객체를 반환하도록 수정
+            return getDefaultProductOption();
         }
         return productOption;
     }
 
-    // 기본 옵션을 반환하는 메소드
+    // 옵션 반환
     private ProductOption getDefaultProductOption() {
-        // 여기서 실제 기본 옵션을 조회하거나 정의할 수 있습니다.
-        // 예를 들어, productOptionRepository.findDefaultOption() 메소드를 구현하여 기본 옵션을 반환하도록 할 수 있습니다.
-        return new ProductOption(); // 또는 실제 기본 옵션 객체를 반환
+        return new ProductOption();
     }
 
     public Buying(Member user, Product product, ProductOption productOption, String size, long price) {

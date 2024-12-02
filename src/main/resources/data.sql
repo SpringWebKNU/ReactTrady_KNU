@@ -1,8 +1,8 @@
 INSERT INTO member(username, password, email, phonenumber, addr)
 VALUES
     ('admin','admin','admin@admin.com', '010-0000-0000', 'admin'),
-    ('dododo','123','peter200111@naver.com', '010-1234-5678', '서울특별시 종로구 사직로 161'),
-    ('jungb1203','456','jungb1203@naver.com', '010-9876-5432', '서울 용산구 남산공원길 105'),
+    ('dododo','123','aaaaaa@naver.com', '010-1234-5678', '서울특별시 종로구 사직로 161'),
+    ('jungbee2','456','bbbbb@naver.com', '010-9876-5432', '서울 용산구 남산공원길 105'),
     ('gogogo','789','789@naver.com', '010-1928-3746', '전북 전주시 완산구 기린대로 99'),
     ('hohoho','012','012@naver.com', '010-5473-3245', '부산 해운대구 우동');
 

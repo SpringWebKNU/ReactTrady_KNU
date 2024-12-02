@@ -18,14 +18,15 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class QnaController {
 
+    // 리액트 연동 구현했습니다.
 
     private final QnaService qnaService;
-    private final MemberService memberService;  // MemberService 추가
+    private final MemberService memberService;
 
     @Autowired
     public QnaController(QnaService qnaService, MemberService memberService) {
         this.qnaService = qnaService;
-        this.memberService = memberService;  // 생성자에 의존성 주입
+        this.memberService = memberService;
     }
 
     @GetMapping
@@ -50,7 +51,6 @@ public class QnaController {
 
     @GetMapping("/{qnaId}/answers")
     public ResponseEntity<List<QnaAnswer>> getAnswers(@PathVariable Long qnaId) {
-        // 해당 QnaId에 대한 모든 답변을 조회하여 반환
         List<QnaAnswer> answers = qnaService.getAnswersByQnaId(qnaId);
         return ResponseEntity.ok(answers);
     }
@@ -60,20 +60,16 @@ public class QnaController {
             @PathVariable Long qnaId,
             @RequestBody QnaAnswerForm qnaAnswerForm) {
 
-        // Qna 객체 조회
-        Qna qna = qnaService.getQnaById(qnaId);  // Qna 객체를 먼저 가져옵니다.
+        Qna qna = qnaService.getQnaById(qnaId);  // Qna 먼저 가져옴
+        QnaAnswer qnaAnswer = qnaService.addAnswerWithoutMember(qnaId, qnaAnswerForm);
 
-        // 답변을 추가하는 서비스 호출 (Member 없이 처리)
-        QnaAnswer qnaAnswer = qnaService.addAnswerWithoutMember(qnaId, qnaAnswerForm);  // Member 없이 답변 추가
-
-        // 성공적으로 작성된 답변을 반환
         return ResponseEntity.ok(qnaAnswer);
     }
 
     @DeleteMapping("/{qnaId}")
     public ResponseEntity<Void> deleteQna(@PathVariable Long qnaId) {
-        qnaService.deleteQna(qnaId);  // 서비스 레벨에서 삭제 처리
-        return ResponseEntity.noContent().build();  // 삭제 완료 후 응답
+        qnaService.deleteQna(qnaId);
+        return ResponseEntity.noContent().build();
     }
 
 
@@ -82,10 +78,7 @@ public class QnaController {
             @PathVariable Long qnaId,
             @PathVariable Long answerId) {
 
-        qnaService.deleteAnswer(qnaId, answerId);  // 서비스 레벨에서 삭제 처리
-        return ResponseEntity.noContent().build();  // 삭제 완료 후 응답
+        qnaService.deleteAnswer(qnaId, answerId);
+        return ResponseEntity.noContent().build();
     }
-
-
-
 }

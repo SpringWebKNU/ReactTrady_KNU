@@ -8,14 +8,8 @@ import java.util.List;
 
 public interface BuyingService {
 
-   // Buying createBuying(Long userId, Long productId, Long productOptionId);
-    // userId 없이 구매 생성
    Buying createBuyingWithUser(Long productId, Long productOptionId, Member user) throws Exception;
-
    List<Buying> getPurchasesByProduct(Long productId);
-   List<Buying> getAllBuyings();
-
    List<Buying> findAllByUser(Member user);
-
 
 }

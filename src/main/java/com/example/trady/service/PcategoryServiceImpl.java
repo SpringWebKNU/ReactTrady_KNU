@@ -19,27 +19,9 @@ public class PcategoryServiceImpl implements PcategoryService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Pcategory findById(Long id) {
-        Optional<Pcategory> pcategory = pcategoryRepository.findById(id);
-        return pcategory.orElse(null);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Iterable<Pcategory> findAll() {
-        return pcategoryRepository.findAll();
-    }
-
-    @Override
     @Transactional
     public Pcategory save(Pcategory pcategory) {
         return pcategoryRepository.save(pcategory);
     }
 
-    @Override
-    @Transactional
-    public void deleteById(Long id) {
-        pcategoryRepository.deleteById(id);
-    }
 }

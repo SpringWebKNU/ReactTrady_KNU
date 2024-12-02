@@ -13,15 +13,12 @@ import java.util.Map;
 
 @Service
 public interface ProductService {
-   // 새로운 상품 저장 (이미지 포함)
    @Transactional
    Product saveProduct(ProductForm productForm);
 
-   // 기존 상품 업데이트
    @Transactional
    Product updateProduct(ProductForm productForm);
 
-   // 특정 상품 조회
    Product findProductById(Long id);
 
    // 특정 상품 삭제
@@ -31,7 +28,7 @@ public interface ProductService {
    // 검색 기능
    List<Product> search(String keyword);
 
-   // 모든 상품 및 카테고리 관련 기능
+   // 모든 상품 및 카테고리
    List<Product> findAllProducts();
    List<Pcategory> findAllCategories();
    Map<Long, List<Product>> groupProductsByCategory();
@@ -39,9 +36,8 @@ public interface ProductService {
    // 파일 저장 (상대 경로 반환)
    String saveFile(MultipartFile file);
 
-   // 가격
+   // 가격 형식 원화~~
    void updateFormattedPrice(Long id, String formattedPrice);
-
    List<ProductOption> getProductOptions(Long productId);
 
 }

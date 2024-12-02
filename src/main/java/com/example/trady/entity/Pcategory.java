@@ -18,33 +18,26 @@ import java.util.List;
 public class Pcategory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY로 자동 생성
-    private Long id; // id 필드 이름 일치 (기존 pid → id)
-
-    private String pname; // 카테고리 이름
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String pname;
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private boolean isFirst = false; // 기본값을 false로 설정
+    private boolean isFirst = false;
 
-    // One-to-Many 관계 추가 (양방향)
     @OneToMany(mappedBy = "pcategory", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Product> products;
 
-    // 선택 여부를 나타내는 필드
-    private boolean isSelected;  // 카테고리가 선택되었는지 여부
-
-
+    // 선택 여부
+    private boolean isSelected;
     public boolean isFirst() {
         return isFirst;
     }
-
     public void setFirst(boolean first) {
         isFirst = first;
     }
 
-
-    // Constructor
     public Pcategory(Long id, String pname) {
         this.id = id;
         this.pname = pname;

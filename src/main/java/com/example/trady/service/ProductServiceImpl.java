@@ -48,17 +48,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product saveProduct(ProductForm productForm) {
         Pcategory pcategory = pcategoryRepository.findById(productForm.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new RuntimeException("xxxx"));
 
         // 파일 처리
-        String filePath = saveFile(productForm.getPimg()); // MultipartFile을 처리
+        String filePath = saveFile(productForm.getPimg());
+        Product product = productForm.toEntity(pcategory, filePath);
 
-        // ProductForm을 Product 엔티티로 변환하고, 파일 경로를 설정
-        Product product = productForm.toEntity(pcategory, filePath); // filePath와 pdate를 포함
-
-        // pdate가 null인 경우 현재 시간으로 설정
+       // null 일때 현재 시간 반환해서 입력할 때 날짜 칸없어서 현재 시간 반환해요
         if (product.getPdate() == null) {
-            product.setPdate(LocalDateTime.now()); // pdate에 현재 시간 설정
+            product.setPdate(LocalDateTime.now()); 
         }
 
         return productRepository.save(product);
@@ -67,27 +65,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updateProduct(ProductForm productForm) {
         Pcategory pcategory = pcategoryRepository.findById(productForm.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Invalid category ID: " + productForm.getCategoryId()));
+                .orElseThrow(() -> new RuntimeException("categoryxx: " + productForm.getCategoryId()));
 
         Product existingProduct = productRepository.findById(productForm.getId())
-                .orElseThrow(() -> new RuntimeException("Product not found: " + productForm.getId()));
+                .orElseThrow(() -> new RuntimeException("Productxx: " + productForm.getId()));
 
         // 파일 처리
         String filePath = saveFile(productForm.getPimg()); // MultipartFile을 처리
-
-        // 기존 Product 엔티티 업데이트
         existingProduct.setPname(productForm.getPname());
-        //existingProduct.setPprice(productForm.getPprice());
         existingProduct.setPcategory(pcategory);
 
-        // pdate가 null인 경우, 이전의 pdate를 그대로 유지하거나 현재 시간을 설정
         if (productForm.getPdate() != null) {
             existingProduct.setPdate(productForm.getPdate());
         } else {
-            existingProduct.setPdate(LocalDateTime.now()); // pdate가 null이면 현재 시간으로 설정
+            existingProduct.setPdate(LocalDateTime.now()); // pdate가 null이면 현재 시간!
         }
 
-        // 새로운 파일이 업로드된 경우에만 이미지 경로 업데이트
         if (filePath != null) {
             existingProduct.setPimg(filePath);
         }
@@ -100,13 +93,11 @@ public class ProductServiceImpl implements ProductService {
             // 업로드 디렉토리를 "C:/Trady/uploads"로 설정
             String uploadDir = "C:/Trady/src/main/resources/static/images/uploads";  // 절대 경로 설정
 
-            // 파일 이름에 고유한 UUID를 추가하여 충돌 방지
+            // 파일에 랜덤이름 앞에 붙혀줘서 겹치는 오류 출동? 방지
             String fileName = UUID.randomUUID().toString().substring(0, 8) + "_" + file.getOriginalFilename();
-
-            // 업로드 디렉토리와 파일 이름을 결합하여 최종 파일 경로 생성
             File destinationFile = new File(uploadDir, fileName);
 
-            // 디렉토리가 없다면 생성
+            // 폴더 없으면 생성!!
             if (!destinationFile.getParentFile().exists()) {
                 destinationFile.getParentFile().mkdirs();  // 디렉토리 생성
             }
@@ -114,8 +105,6 @@ public class ProductServiceImpl implements ProductService {
             try {
                 // 파일을 해당 경로에 저장
                 file.transferTo(destinationFile);
-
-                // 상대 경로로 반환 (웹 애플리케이션에서 접근 가능한 경로)
                 return fileName;
             } catch (IOException e) {
                 throw new RuntimeException("File upload failed", e);
@@ -133,20 +122,13 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     @Override
     public void deleteProduct(Long id) {
-        // 1. Product를 조회합니다.
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        // ProductOption 삭제
+        // 상품 삭제하면 밑에 있던것도 다 삭제해야 삭제되욤. 아니면 테이블끼리 꼬여서!
         productOptionService.deleteByProductId(product.getId());
-        
-        // 2. Selling 테이블에서 해당 Product ID를 참조하는 데이터를 삭제합니다.
         sellingRepository.deleteBySproduct(product);
-
-        // 2. Selling 테이블에서 해당 Product ID를 참조하는 데이터를 삭제합니다.
         buyingRepository.deleteByProductOptionId(id);
-
-        // 3. Product를 삭제합니다.
         productRepository.delete(product);
     }
 
@@ -182,18 +164,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateFormattedPrice(Long id, String formattedPrice) {
-        // 해당 상품을 찾아서 formattedPrice 값 업데이트
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         product.setFormattedPrice(formattedPrice);
 
-        // 데이터베이스에 저장
         productRepository.save(product);
     }
 
-
-    // 해당 상품의 모든 옵션 가져오기
+    // 해당 상품의 모든 옵션 가져와
     public List<ProductOption> getProductOptions(Long productId) {
         return productOptionRepository.findByProductId(productId);
     }

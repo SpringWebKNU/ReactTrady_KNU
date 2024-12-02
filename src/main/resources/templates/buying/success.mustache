@@ -2,24 +2,20 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <!-- 결제 완료 카드 -->
             <div class="card shadow-sm border-light rounded">
                 <div class="card-header text-center bg-success text-white">
                     <h3 class="m-0">주문 완료!</h3>
                 </div>
                 <div class="card-body">
-                    <!-- 주문 완료 메시지 -->
                     <div class="text-center mb-4">
                         <h4 class="text-success">주문해 주셔서 감사합니다!</h4>
                         <p>주문이 정상적으로 처리되었습니다. 아래의 정보를 확인해 주세요.</p>
                     </div>
 
-                    <!-- 상품 이미지 -->
                     <div class="text-center mb-4">
                         <img src="/images/uploads/{{productImageUrl}}" alt="{{productName}}" class="img-fluid" style="max-width: 300px;">
                     </div>
 
-                    <!-- 구매자 정보 -->
                     <h5 class="fw-bold text-success">구매자</h5>
                     <p>{{userName}}님</p>
 
@@ -29,7 +25,6 @@
                     <h5 class="fw-bold text-success">배송 주소</h5>
                     <p>{{address}}</p>
 
-                    <!-- 상품 정보 -->
                     <h5 class="fw-bold text-success">상품명</h5>
                     <p>{{productName}}</p>
 
@@ -39,11 +34,9 @@
                     <h5 class="fw-bold text-success">가격</h5>
                     <p>{{price}}</p>
 
-                    <!-- 구매 정보 -->
                     <h5 class="fw-bold text-success">구매 정보</h5>
                     <p>주문 번호: {{buying.id}}</p>
 
-                    <!-- 버튼 -->
                     <div class="text-center mt-4">
                         <a href="/products/all" class="btn btn-primary">홈으로 가기</a>
                     </div>

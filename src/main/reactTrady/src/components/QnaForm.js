@@ -21,12 +21,12 @@ const QnaForm = () => {
             const response = await axios.post('http://localhost:8080/api/qnas', {
                 title: title,
                 content: content,
-                memberId: 1, // 로그인하지 않아도 1로 하드코딩된 사용자 ID를 사용
+                memberId: 1,
             });
 
             if (response.status === 200) {
                 alert('Q&A가 성공적으로 작성되었습니다.');
-                navigate('/qnas');  // 작성 후 Q&A 목록 페이지로 이동
+                navigate('/qnas');
             }
         } catch (error) {
             setErrorMessage('Q&A 작성에 실패했습니다. 다시 시도해 주세요.');

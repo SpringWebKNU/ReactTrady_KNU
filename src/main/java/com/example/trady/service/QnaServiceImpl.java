@@ -39,15 +39,14 @@ public class QnaServiceImpl implements QnaService {
 
     @Override
     public Qna createQna(QnaForm qnaForm) {
-        // 임시로 로그인된 사용자를 사용 (예시로 ID 1을 사용)
-        Member member = memberRepository.findById(1L)  // 임의로 ID 1번 사용자 사용
-                .orElseThrow(() -> new RuntimeException("Member not found"));
+        //리액트 연동시 세션 유지 x -> 유저 정보 고정해둠
+        Member member = memberRepository.findById(1L)
+                .orElseThrow(() -> new RuntimeException("xx"));
 
-        // 기존 Qna 엔티티를 생성하지 않고, 그냥 값을 추가하는 방식으로 처리
-        Qna qna = new Qna();  // 기존 엔티티에 값을 덮어씀
+        Qna qna = new Qna();
         qna.setTitle(qnaForm.getTitle());
         qna.setContent(qnaForm.getContent());
-        qna.setMember(member);  // 작성자 정보를 설정
+        qna.setMember(member);
 
         return qnaRepository.save(qna);
     }
@@ -58,67 +57,41 @@ public class QnaServiceImpl implements QnaService {
                 .orElseThrow(() -> new RuntimeException("Qna not found"));
     }
 
-
-    // Member 객체를 인자로 받도록 addAnswer 메서드 수정
-    public QnaAnswer addAnswer(Long qnaId, QnaAnswerForm qnaAnswerForm, Member member) {
-        // Qna ID로 Qna 객체를 찾음
-        Qna qna = qnaRepository.findById(qnaId)
-                .orElseThrow(() -> new RuntimeException("Qna를 찾을 수 없습니다."));
-
-        // QnaAnswer 객체 생성
-        QnaAnswer qnaAnswer = new QnaAnswer(qnaAnswerForm.getContent(), qna, member);
-
-        // QnaAnswer 저장
-        return qnaAnswerRepository.save(qnaAnswer);
-    }
-
     public QnaAnswer addAnswerWithoutMember(Long qnaId, QnaAnswerForm qnaAnswerForm) {
-        // Qna 객체 조회
         Qna qna = getQnaById(qnaId);
-
-        // QnaAnswer 객체 생성 (Member 없이)
         QnaAnswer qnaAnswer = new QnaAnswer();
-        qnaAnswer.setContent(qnaAnswerForm.getContent());  // 답변 내용 설정
-        qnaAnswer.setQna(qna);  // Qna와 연결
+        qnaAnswer.setContent(qnaAnswerForm.getContent()); 
+        qnaAnswer.setQna(qna); 
 
-        // QnaAnswer 저장
         return qnaAnswerRepository.save(qnaAnswer);
     }
-
 
     @Override
     public List<QnaAnswer> getAnswersByQnaId(Long qnaId) {
         Qna qna = qnaRepository.findById(qnaId)
-                .orElseThrow(() -> new RuntimeException("Qna not found"));
+                .orElseThrow(() -> new RuntimeException("xx"));
 
-        // 해당 Qna에 대한 모든 답변을 반환
         return qnaAnswerRepository.findByQna(qna);
     }
 
     public void deleteQna(Long qnaId) {
-        // 게시글 조회
         Qna qna = qnaRepository.findById(qnaId)
-                .orElseThrow(() -> new RuntimeException("Qna not found"));
+                .orElseThrow(() -> new RuntimeException("xx"));
 
-        // 해당 게시글에 연결된 답변 삭제
+        // 해당 게시글 답변 삭제 후 삭제해야됨!!!
         List<QnaAnswer> answers = qnaAnswerRepository.findByQna(qna);
         for (QnaAnswer answer : answers) {
-            qnaAnswerRepository.delete(answer);  // 답변 삭제
+            qnaAnswerRepository.delete(answer);
         }
 
-        // 게시글 삭제
         qnaRepository.delete(qna);
     }
 
-
-
     public void deleteAnswer(Long qnaId, Long answerId) {
-        // 답변 조회
         QnaAnswer qnaAnswer = qnaAnswerRepository.findById(answerId)
-                .orElseThrow(() -> new RuntimeException("Answer not found"));
+                .orElseThrow(() -> new RuntimeException("xx"));
 
-        // 답변 삭제
-        qnaAnswerRepository.delete(qnaAnswer);  // 답변 삭제
+        qnaAnswerRepository.delete(qnaAnswer);
     }
 
 }

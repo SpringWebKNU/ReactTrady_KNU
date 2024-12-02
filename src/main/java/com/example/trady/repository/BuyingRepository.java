@@ -20,8 +20,7 @@ public interface BuyingRepository extends JpaRepository<Buying,Long> {
     @Query("UPDATE Buying b SET b.productOption = NULL WHERE b.productOption.id = :productOptionId")
     void updateProductOptionToDefault(@Param("productOptionId") Long productOptionId);
 
-    // 특정 상품에 대해 구매된 상품 목록을 조회하는 메소드
+    // 구매된 상품 목록 조회
     List<Buying> findByProductId(Long productId);
-
     List<Buying> findByUser(Member user);
 }

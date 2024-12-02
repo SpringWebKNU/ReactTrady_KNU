@@ -11,11 +11,9 @@ import java.util.List;
 public interface QnaService {
     List<Qna> getAllQnas();
 
-    Qna createQna(QnaForm qnaForm); // QnaForm을 매개변수로 받도록 수정
+    Qna createQna(QnaForm qnaForm);
 
-    Qna getQnaById(Long qnaId);  // Fetches a Qna by ID
-
-    QnaAnswer addAnswer(Long qnaId, QnaAnswerForm qnaAnswerForm, Member member);
+    Qna getQnaById(Long qnaId);
 
     QnaAnswer addAnswerWithoutMember(Long qnaId, QnaAnswerForm qnaAnswerForm);
 

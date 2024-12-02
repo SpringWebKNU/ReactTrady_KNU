@@ -26,10 +26,6 @@ public class Member {
 
     private String addr;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private List<Qna> qnaList;
-
     public Member(Long userid, String username, String password, String email, String phonenumber, String addr) {
         this.userid = userid;
         this.username = username;

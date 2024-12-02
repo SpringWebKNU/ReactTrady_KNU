@@ -6,7 +6,7 @@ const Header = ({ loggedInUser, isAdmin, msg }) => {
     const [admin, setAdmin] = useState(false);
 
     useEffect(() => {
-        fetch('/api/session') // Endpoint that returns session info (e.g., loggedInUser and isAdmin)
+        fetch('/api/session')
             .then(response => response.json())
             .then(data => {
                 setUser(data.currentUser);

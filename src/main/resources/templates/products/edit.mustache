@@ -3,13 +3,12 @@
     <form class="container my-5 p-4 border rounded shadow-sm" action="/products/update" method="post" enctype="multipart/form-data">
         <h2 class="mb-4 text-center text-primary">상품 정보 편집</h2>
         <input type="hidden" name="id" value="{{id}}">
-        <!-- 상품명 -->
+
         <div class="mb-3">
             <label class="form-label fw-bold">상품명</label>
             <input type="text" class="form-control" name="pname" value="{{pname}}" placeholder="상품명을 입력하세요" required>
         </div>
 
-        <!-- 이미지 -->
         <div class="mb-3">
 
             <label class="form-label fw-bold">이미지</label>
@@ -17,7 +16,6 @@
             <small class="form-text text-muted">이미지 파일을 선택하세요 (기존 값: <code>{{pimg}}</code>)</small>
         </div>
 
-        <!-- 카테고리 -->
         <div class="mb-3">
             <label class="form-label fw-bold">카테고리</label>
             <select class="form-select" name="categoryId" required>
@@ -28,10 +26,8 @@
                 <option value="4" {{#isCategory4}}selected{{/isCategory4}}>뉴발란스</option>
                 <option value="5" {{#isCategory5}}selected{{/isCategory5}}>기타</option>
             </select>
-
-
         </div>
-        <!-- 버튼 -->
+
         <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-primary px-4">저장</button>
             <a href="/products/{{id}}" class="btn btn-secondary px-4">취소</a>
